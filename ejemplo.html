@@ -1,0 +1,95 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>Tarea11SIG-JoseCarlosAlvarezUmana</title>
+<link rel="stylesheet"
+href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"/>
+<!--[if lte IE 8]>
+<link rel="stylesheet"
+href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+<![endif]-->
+<script
+src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+<style type="text/css">
+#map { width: 600px; height: 400px }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script type="text/javascript">
+function onEachFeature(feature, layer) {
+layer.bindPopup("ID: "+feature.properties.nombre);
+};
+var xhr = new XMLHttpRequest();
+xhr.open('GET','avenidas.geojson',false);
+xhr.send(null);
+
+var xhr2 = new XMLHttpRequest();
+xhr2.open('GET','calles.geojson',false);
+xhr2.send(null);
+
+var xhr3 = new XMLHttpRequest();
+xhr3.open('GET','edificios.geojson',false);
+xhr3.send(null);
+
+var xhr4 = new XMLHttpRequest();
+xhr4.open('GET','quebrada.geojson',false);
+xhr4.send(null);
+
+var data = JSON.parse(xhr.responseText);
+
+var data2 = JSON.parse(xhr2.responseText);
+
+var data3 = JSON.parse(xhr3.responseText);
+
+var data4 = JSON.parse(xhr4.responseText);
+
+var style = {
+"color": "#ff7800",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style2 = {
+"color": "#ffff33",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style3 = {
+"color": "#7DCC7D",
+"weight": 5,
+"opacity": 0.65
+};
+
+var style4 = {
+"color": "#CC0000",
+"weight": 5,
+"opacity": 0.65
+};
+
+var map = L.map('map').setView([0.450,-0.450],0);
+
+L.geoJson(data, {
+style: style, onEachFeature: onEachFeature
+}).addTo(map);
+
+L.geoJson(data2, {
+style: style2, onEachFeature: onEachFeature
+}).addTo(map);
+
+L.geoJson(data3, {
+style: style3, onEachFeature: onEachFeature
+}).addTo(map);
+
+L.geoJson(data4, {
+style: style4, onEachFeature: onEachFeature
+}).addTo(map);
+
+
+
+
+</script>
+</body>
+</html>
